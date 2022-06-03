@@ -1,6 +1,6 @@
 import unittest
 
-from product import Product
+from product import Product, ProductDiscountError
 from shopping_cart import ShoppingCart
 
 
@@ -59,6 +59,11 @@ class TestShoppingCart(unittest.TestCase):
         self.shopping_cart_2.remove_product(self.smartphone)
 
         self.assertNotIn(self.smartphone, self.shopping_cart_2.products)
+
+    def test_product_discount_error(self):
+        with self.assertRaises(ProductDiscountError):
+            Product("Product Example", 10.0, discount=11.0)
+
 
 if __name__ == "__main__":
     unittest.main()
