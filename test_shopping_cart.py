@@ -64,6 +64,32 @@ class TestShoppingCart(unittest.TestCase):
         with self.assertRaises(ProductDiscountError):
             Product("Product Example", 10.0, discount=11.0)
 
+    def test_total_shopping_cart(self):
+        self.shopping_cart_1.add_product(Product("Pen", 5.0))
+        self.shopping_cart_1.add_product(Product("Camera", 320.0, discount=50.0))
+
+        self.assertGreater(self.shopping_cart_1.total, 0)
+        self.assertGreaterEqual(self.shopping_cart_1.total, 0)
+        self.assertLessEqual(self.shopping_cart_1.total, 99999)
+        self.assertEqual(self.shopping_cart_1.total, 275.0)
+
+    def test_total_empty_shopping_cart(self):
+        self.assertEqual(self.shopping_cart_1.total, 0)
+
+    @unittest.skip("This test doesn't meet the requirements")
+    def test_skip_example(self):
+        self.assertEqual(1, 1)
+
+    # skipIf -> skips if condition == True
+    # skipUnless -> skips if condition == False
+    @unittest.skipIf(True, "This test is skipped because condition is True.")
+    def test_skip_if(self):
+        self.assertEqual(1, 1)
+
+    @unittest.skipUnless(False, "This test is skipped because condition is False.")
+    def test_skip_unless(self):
+        self.assertEqual(1, 1)
+
 
 if __name__ == "__main__":
     unittest.main()
